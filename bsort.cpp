@@ -4,7 +4,7 @@
 
 void sfen_quicksort(void);
 
-struct hash					    // 40 bytes
+struct hash		        // 40 bytes
   { unsigned long long key1;	// 8 bytes
     unsigned long long key2;	// 8 bytes
     unsigned long long key3;	// 8 bytes
