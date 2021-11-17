@@ -31,27 +31,27 @@ int main(int argc, char *argv[]) {
          { p_memory = (char*)malloc(ms); if (p_memory) break; }
            printf("Free memory = %d Mb\n",ms>>20); 
 
-		free(p_memory);
-		p_memory=(char*)malloc(ms);
-		sfen=(struct hash *)p_memory;
-		bgn=p_memory;
-		p_memory=p_memory+ms;
-		limit=p_memory-bgn;                        // calulate maximum number entries
+	free(p_memory);
+	p_memory=(char*)malloc(ms);
+	sfen=(struct hash *)p_memory;
+	bgn=p_memory;
+	p_memory=p_memory+ms;
+	limit=p_memory-bgn;                        // calulate maximum number entries
         limit/=40;                                 // length structure *sfen
         limit-=100;                                // create some slack space
-		printf("\nAllocated space for %d million sfen entries\n\n",limit>>20);
+	printf("\nAllocated space for %d million sfen entries\n\n",limit>>20);
  		
 x10:	printf("Enter Souce File Name     : " ); gets(fn); 
-	    fpc=fopen(fn,"rb");	          
-		if (fpc==0) { printf("\nFile %s not present, try again",fn); goto x10; }
+	fpc=fopen(fn,"rb");	          
+	if (fpc==0) { printf("\nFile %s not present, try again",fn); goto x10; }
 	  	
         printf("\nReading file into memory...");
 
 lees:   x=fread(&sfen[count].key1,8,1,fpc); if (x<1) { fclose(fpc); goto done; }
-	      fread(&sfen[count].key2,8,1,fpc);
-	      fread(&sfen[count].key3,8,1,fpc);
-	      fread(&sfen[count].key4,8,1,fpc);
-	      fread(&sfen[count].key5,8,1,fpc);
+	  fread(&sfen[count].key2,8,1,fpc);
+	  fread(&sfen[count].key3,8,1,fpc);
+	  fread(&sfen[count].key4,8,1,fpc);
+	  fread(&sfen[count].key5,8,1,fpc);
         count++; if (count > limit) { printf("Insufficient memory... \a"); gets(w); exit(1); }
         goto lees;
 
@@ -65,7 +65,7 @@ done:   printf("\n\nDone... counted %d records ",count);
 
         printf("\n\nSorting done... ");
 
-		printf("\n\nChecking for doubles ");
+	printf("\n\nChecking for doubles ");
 		
         k1=0; k2=0; k3=0; k4=0;
 
@@ -73,16 +73,16 @@ done:   printf("\n\nDone... counted %d records ",count);
          { if (sfen[x].key1==k1 && sfen[x].key2==k2 && sfen[x].key3==k3 && sfen[x].key4==k4) { doubles++; continue; }
            k1=sfen[x].key1; k2=sfen[x].key2; k3=sfen[x].key3; k4=sfen[x].key4; }
 
-		printf("\n\nDoubles found : %d ",doubles);
+	printf("\n\nDoubles found : %d ",doubles);
 
         gets(w);
 
-		return 0;
+	return 0;
 }
 
 void sfen_quicksort()
 
-{	    unsigned long long zz; char H[500],I[500],J[500];
+{	unsigned long long zz; char H[500],I[500],J[500];
     	int t1,l,i,j,r;
 
         t1=1; st1[1]=0; st2[1]=count-1;		        
@@ -111,7 +111,7 @@ lab20:  sprintf(J,"%d%d%d%d",
         sfen[j].key3,
         sfen[j].key4);
         
-		if (strcmp(J,H) <=0  ||  j <= l) goto lab30;
+	if (strcmp(J,H) <=0  ||  j <= l) goto lab30;
         j=j-1; goto lab20;
 
 lab30:  if (i > j)  goto lab40;
